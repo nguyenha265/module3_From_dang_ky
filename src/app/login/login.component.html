@@ -1,0 +1,62 @@
+<h2 class="text-center">Login</h2>
+<form [formGroup]="loginForm" class="col-md-6 offset-md-3">
+  <div class="form-group row">
+    <label class="col">
+      Email
+      <input type="email" class="form-control" formControlName="email">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
+    Invalid email!
+  </div>
+
+  <div class="form-group row">
+    <label class="col">
+      Password
+      <input type="password" class="form-control" formControlName="password">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+    ít nhất là 6 ký tự và nhiều nhất 16 ký tự
+  </div>
+
+  <div class="form-group row">
+    <label class="col">
+      Confirm Password
+      <input type="password" class="form-control" formControlName="confirmPassword">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="loginForm.hasError('notSame')&&loginForm.get('confirmPassword').touched">
+    Password không giống
+  </div>
+  <div>
+    <select class="form-control" formControlName="country" required>
+      <option>a</option>
+      <option>b</option>
+      <option>c</option>
+      <option>d</option>
+    </select>
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="loginForm.get('country').invalid && loginForm.get('country').pristine; else elseBlock">
+    chưa chon select
+  </div>
+  <ng-template class="alert alert-success" #elseBlock>ok</ng-template>
+
+  <div class="form-group row">
+    <label class="col">
+      Age
+      <input type="number" class="form-control" formControlName="age">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('age').invalid && loginForm.get('age').touched">
+    nhỏ nhất 18 và lớn nhất 60 tuổi
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-info" type="submit">Submit</button>
+  </div>
+</form>
+
